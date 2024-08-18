@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 export const createAccountValidationYup = async (req, res, next) => {
+    console.log(req.body);
     let validationSchema = Yup.object({
         fullName: Yup.string()
             .required('Full name required')

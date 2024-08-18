@@ -8,8 +8,14 @@ import {
     createNoteValidationYup,
     loginValidationYup,
 } from './validations.js';
-import { login, register } from './controllers/userControllers.js';
-import { addNote } from './controllers/noteControllers.js';
+import { getUser, login, register } from './controllers/userControllers.js';
+import {
+    addNote,
+    deleteNote,
+    editNote,
+    getAllNotes,
+    updateIsPinned,
+} from './controllers/noteControllers.js';
 
 dotenv.config();
 
@@ -34,7 +40,27 @@ app.post('/create-account', createAccountValidationYup, register);
 app.post('/login', loginValidationYup, login);
 
 // Add Note
-app.post('/add-note', authenticateToken, createNoteValidationYup, addNote)
+app.post('/add-note', authenticateToken, createNoteValidationYup, addNote);
+
+// Edit note
+app.put(
+    '/edit-note/:noteId',
+    authenticateToken,
+    createNoteValidationYup,
+    editNote
+);
+
+// Get all notes
+app.get('/get-all-notes', authenticateToken, getAllNotes);
+
+// Delete note
+app.delete('/delete-note/:noteId', authenticateToken, deleteNote);
+
+// Update isPinned value
+app.put('/update-note-pinned/noteId', authenticateToken, updateIsPinned);
+
+// Get user
+app.get('/get-user', authenticateToken, getUser);
 
 app.listen(8000, (err) => {
     if (err) {

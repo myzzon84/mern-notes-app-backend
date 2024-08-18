@@ -44,8 +44,8 @@ export const login = async (req, res) => {
         });
         return res.json({
             message: 'Login successful',
-            email,
             accessToken,
+            userInfo,
         });
     }else{
         return res.status(400).json({
@@ -53,3 +53,15 @@ export const login = async (req, res) => {
         })
     }
 };
+
+export const getUser = async (req, res) => {
+    const {user} = req.user;
+    const isUser = await User.findOne({_id: user._id});
+    if(!isUser){
+        return res.status(401);
+    }
+    const {password, _id, __v, ...data} = user;
+    return res.json({
+        user: data
+    });
+}
