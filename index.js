@@ -14,6 +14,7 @@ import {
     deleteNote,
     editNote,
     getAllNotes,
+    searchNotes,
     updateIsPinned,
 } from './controllers/noteControllers.js';
 
@@ -58,6 +59,9 @@ app.delete('/delete-note/:noteId', authenticateToken, deleteNote);
 
 // Update isPinned value
 app.put('/update-note-pinned/noteId', authenticateToken, updateIsPinned);
+
+//Search notes
+app.get('/search-notes', authenticateToken, searchNotes)
 
 // Get user
 app.get('/get-user', authenticateToken, getUser);
