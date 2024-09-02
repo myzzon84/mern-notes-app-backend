@@ -58,7 +58,7 @@ app.get('/get-all-notes', authenticateToken, getAllNotes);
 app.delete('/delete-note/:noteId', authenticateToken, deleteNote);
 
 // Update isPinned value
-app.put('/update-note-pinned/noteId', authenticateToken, updateIsPinned);
+app.put('/update-note-pinned/:noteId', authenticateToken, updateIsPinned);
 
 //Search notes
 app.get('/search-notes', authenticateToken, searchNotes)
